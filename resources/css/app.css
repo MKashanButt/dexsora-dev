@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+
+/* Custom styles */
+button{
+    cursor: pointer;
+}
+.table-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+}
+
+/* Smooth transitions */
+.transition-all {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Custom Animations */
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes float-medium {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(90deg); }
+}
+
+@keyframes float-fast {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(270deg); }
+}
+
+@keyframes grid-fade {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-medium {
+    animation: float-medium 6s ease-in-out infinite;
+}
+
+.animate-float-fast {
+    animation: float-fast 4s ease-in-out infinite;
+}
+
+.animate-grid-fade {
+    animation: grid-fade 10s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 12s ease-in-out infinite;
+}
+
+.animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Modal Animations */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scale-in {
+    from { 
+        opacity: 0; 
+        transform: scale(0.9) translateY(-20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+
+@keyframes slide-up {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+}
+
+.animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+}
+
+.animate-row-highlight {
+    animation: row-highlight 0.3s ease-out;
+}
+
+.animate-cell-focus {
+    animation: cell-focus 0.2s ease-out;
+}
+
+.animate-delete-slide {
+    animation: delete-slide 0.3s ease-in;
+}
+
+.animate-add-row-slide {
+    animation: add-row-slide 0.5s ease-out;
+}
+
+/* Enhanced table styling */
+.table-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+}
+
+.table-row-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.table-row-hover:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Smooth scrolling for table */
+.table-container {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced focus states */
+.focus-ring {
+    position: relative;
+}
+
+.focus-ring:focus-within::after {
+    opacity: 1;
+}
+
+.status-select option {
+    background-color: white !important;
+    color: #333 !important;
+}
+
+.status-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Clean table styling */
+.table-fixed {
+    table-layout: fixed;
+}
+
+/* Avatar initials */
+.avatar-initials {
+    font-size: 11px;
+    line-height: 1;
+}
+
+/* Row hover effects */
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Input focus states */
+input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Status badge styling */
+.bg-green-500 {
+    background-color: #22c55e !important;
+}
+
+.bg-orange-500 {
+    background-color: #f97316 !important;
+}
+
+.bg-red-500 {
+    background-color: #ef4444 !important;
+}
+
+.bg-gray-500 {
+    background-color: #6b7280 !important;
+}
