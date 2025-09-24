@@ -43,8 +43,7 @@
         @if ($sheet->headers && count($sheet->headers) > 0)
             <div class="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 overflow-hidden">
                 <!-- Table Header Bar -->
-                <x-table-header title="Data Table" subtitle="Interactive spreadsheet with real-time updates"
-                    icon="table" />
+                <x-table-header title="Data Table" subtitle="Interactive spreadsheet with real-time updates" icon="table" />
 
                 <!-- Table Toolbar -->
                 <x-table-toolbar>
@@ -52,10 +51,14 @@
                         <x-icon name="plus" class="h-4 w-4 mr-2" />
                         Add Row
                     </x-button>
-                    
-                    <button id="multiDeleteBtn" onclick="if(typeof deleteSelectedRows === 'function') { deleteSelectedRows(); } else { console.error('deleteSelectedRows function not available'); }" class="hidden inline-flex items-center px-3 py-2 bg-red-500 text-white text-sm font-semibold rounded-lg hover:bg-red-600 transition-all duration-200 border border-red-500 hover:border-red-600">
+
+                    <button id="multiDeleteBtn"
+                        onclick="if(typeof deleteSelectedRows === 'function') { deleteSelectedRows(); } else { console.error('deleteSelectedRows function not available'); }"
+                        class="hidden inline-flex items-center px-3 py-2 bg-red-500 text-white text-sm font-semibold rounded-lg hover:bg-red-600 transition-all duration-200 border border-red-500 hover:border-red-600">
                         <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                            </path>
                         </svg>
                         Delete Selected (<span id="selectedCount">0</span>)
                     </button>
@@ -65,8 +68,8 @@
                             class="inline-flex items-center px-3 py-2 bg-white/80 text-gray-700 text-sm font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 border border-gray-200/50 hover:shadow-md hover:scale-105">
                             <x-icon name="export" class="h-4 w-4 mr-2" />
                             Export
-                            <svg class="h-4 w-4 ml-2 transition-transform duration-200 group-hover:rotate-180"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-4 w-4 ml-2 transition-transform duration-200 group-hover:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                                 </path>
                             </svg>
@@ -116,8 +119,7 @@
                                 <span>Ctrl+Enter: Add Row</span>
                             </span>
                             <span class="flex items-center space-x-2">
-                                <svg class="h-4 w-4 text-green-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="h-4 w-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
@@ -130,25 +132,26 @@
                 @if ($sheet->data && count($sheet->data) > 0)
                     <div class="overflow-x-auto">
                         <table class="min-w-full">
-                            <thead
-                                class="bg-gradient-to-r from-gray-50/80 via-blue-50/60 to-indigo-50/60 sticky top-0 z-10">
+                            <thead class="bg-gradient-to-r from-gray-50/80 via-blue-50/60 to-indigo-50/60 sticky top-0 z-10">
                                 <tr>
-                                    <th class="w-24 px-2 py-4 text-center text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-200">
-                                        <input type="checkbox" id="selectAll" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" onchange="if(typeof toggleSelectAll === 'function') { toggleSelectAll(); } else { console.error('toggleSelectAll function not available'); }">
+                                    <th
+                                        class="w-24 px-2 py-4 text-center text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-200">
+                                        <input type="checkbox" id="selectAll"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                            onchange="if(typeof toggleSelectAll === 'function') { toggleSelectAll(); } else { console.error('toggleSelectAll function not available'); }">
                                     </th>
                                     @foreach ($sheet->headers as $headerIndex => $header)
                                         <th
                                             class="px-6 py-4 text-left text-sm font-bold text-gray-800 uppercase tracking-wider border border-gray-200 relative group">
                                             <div class="flex items-center space-x-2">
                                                 <span>{{ $header }}</span>
-                                                <div
-                                                    class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                                     <div class="h-2 w-2 bg-blue-400 rounded-full"></div>
                                                 </div>
                                             </div>
                                             <div
-                                                 class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 transform scale-x-0 transition-transform duration-300 origin-left">
-                                             </div>
+                                                class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 transform scale-x-0 transition-transform duration-300 origin-left">
+                                            </div>
                                         </th>
                                     @endforeach
                                     <th
@@ -165,29 +168,30 @@
                                     <tr class="group hover:bg-gray-50 transition-all duration-200 table-row-hover focus-ring"
                                         data-row="{{ $rowIndex }}">
                                         <td class="px-2 py-4 border border-gray-200 text-center">
-                                            <input type="checkbox" class="row-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" value="{{ $rowIndex }}" onchange="if(typeof updateRowSelection === 'function') { updateRowSelection(); } else { console.error('updateRowSelection function not available'); }">
+                                            <input type="checkbox"
+                                                class="row-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                                value="{{ $rowIndex }}"
+                                                onchange="if(typeof updateRowSelection === 'function') { updateRowSelection(); } else { console.error('updateRowSelection function not available'); }">
                                         </td>
                                         @foreach ($sheet->headers as $headerIndex => $header)
                                             <td class="border border-gray-200 relative">
                                                 <div class="relative">
                                                     <input type="text" value="{{ $row[$headerIndex] ?? '' }}"
-                                                     class="w-100 border-0 bg-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none px-6 py-2 focus:bg-white transition-all duration-200 text-gray-700 font-normal placeholder-gray-400 table-input"
-                                                     onchange="updateCell({{ $rowIndex }}, {{ $headerIndex }}, this.value)"
-                                                     onblur="saveData(); unhighlightRow({{ $rowIndex }})"
-                                                     onfocus="highlightRow({{ $rowIndex }})"
-                                                     placeholder="Enter {{ strtolower(e($header)) }}"
-                                                     style="cursor: text;">
+                                                        class="w-100 border-0 bg-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none px-6 py-2 focus:bg-white transition-all duration-200 text-gray-700 font-normal placeholder-gray-400 table-input"
+                                                        onchange="updateCell({{ $rowIndex }}, {{ $headerIndex }}, this.value)"
+                                                        onblur="saveData(); unhighlightRow({{ $rowIndex }})"
+                                                        onfocus="highlightRow({{ $rowIndex }})"
+                                                        placeholder="Enter {{ strtolower(e($header)) }}" style="cursor: text;">
                                                 </div>
                                             </td>
                                         @endforeach
                                         <td class="px-6 py-4 border border-gray-200 text-sm font-medium">
                                             <div class="flex items-center space-x-2">
-                                                <button onclick="if(typeof deleteRow === 'function') { deleteRow({{ $rowIndex }}); } else { console.error('deleteRow function not available'); }"
+                                                <button
+                                                    onclick="if(typeof deleteRow === 'function') { deleteRow({{ $rowIndex }}); } else { console.error('deleteRow function not available'); }"
                                                     class="text-gray-400 hover:text-red-600 p-1.5 rounded hover:bg-gray-100 transition-all duration-200 group/delete">
-                                                    <svg class="h-4 w-4" fill="none"
-                                                        stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
+                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
                                                         </path>
                                                     </svg>
@@ -201,15 +205,19 @@
                     </div>
                 @else
                     <!-- Empty State - Displayed inside the table container -->
-                    <div class="py-16">
-                        <x-empty-state title="No data yet"
-                            description="Add your first row to start organizing your data in this table."
-                            buttonText="Add Your First Row" buttonAction="addRow()" icon="table" />
+                    <div id="tableBody">
+                        {{-- <tbody class="bg-white divide-y divide-gray-100" id="tableBody"> --}}
+                            <x-empty-state title="No data yet"
+                                description="Add your first row to start organizing your data in this table."
+                                buttonText="Add Your First Row" buttonAction="addRow()" icon="table" />
+                            {{--
+                        </tbody> --}}
                     </div>
                 @endif
 
                 <!-- Table Footer -->
-                <x-table-footer :columns="count($sheet->headers)" :rows="count($sheet->data ?? [])" status="Real-time editing" />
+                <x-table-footer :columns="count($sheet->headers)" :rows="count($sheet->data ?? [])"
+                    status="Real-time editing" />
             </div>
         @endif
     </div>
@@ -267,7 +275,7 @@
         }
 
         // Initialize the table when the page loads
-        document.addEventListener('DOMContentLoaded', async function() {
+        document.addEventListener('DOMContentLoaded', async function () {
             try {
                 await loadSheetJavaScript();
 
