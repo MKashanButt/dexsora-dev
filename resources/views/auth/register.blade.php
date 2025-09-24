@@ -8,11 +8,11 @@
     <title>Register - DexSora</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700" rel="stylesheet" />
-    @if (file_exists(public_path('build/manifest.json')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @if (config('app.env') === 'production')
+        <script src="{{asset('js/tailwind.min.js')}}"></script>
     @else
-        <link rel="stylesheet" href="{{public_path('build/assets/app-DAvu9m3x.css')}}">
-        <script src="{{public_path('build/assets/app-C0G0cght.js')}}"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
 </head>
 
