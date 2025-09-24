@@ -18,14 +18,14 @@ function addRow() {
     newRowElement.setAttribute("data-row", rowIndex);
 
     let rowHtml = "";
-    
+
     // Add checkbox column
     rowHtml += `
         <td class="px-6 py-4 border border-gray-200 text-center">
             <input type="checkbox" class="row-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" value="${rowIndex}" onchange="updateRowSelection()">
         </td>
     `;
-    
+
     headers.forEach((header, headerIndex) => {
         rowHtml += `
             <td class="px-6 py-4 border border-gray-200 relative">
@@ -66,12 +66,13 @@ function addRow() {
 
     // Auto-save after adding row
     setTimeout(() => saveData(), 100);
+    window.location.reload();
 }
 
 function deleteRow(rowIndex) {
     console.log("deleteRow called with index:", rowIndex);
     console.log("Current data length:", currentData.length);
-    
+
     if (confirm("Are you sure you want to delete this row?")) {
         // Remove from currentData array
         currentData.splice(rowIndex, 1);
@@ -104,7 +105,7 @@ function deleteRow(rowIndex) {
             // Update all input onchange and onblur handlers
             const inputs = row.querySelectorAll("input");
             inputs.forEach((input, inputIndex) => {
-                if (input.classList.contains('row-checkbox')) {
+                if (input.classList.contains("row-checkbox")) {
                     // Update checkbox value and onchange handler
                     input.setAttribute("value", index);
                     input.setAttribute("onchange", "updateRowSelection()");
@@ -118,9 +119,9 @@ function deleteRow(rowIndex) {
                 }
             });
         });
-        
+
         // Update multi-delete button state after row deletion
-        if (typeof updateMultiDeleteButton === 'function') {
+        if (typeof updateMultiDeleteButton === "function") {
             updateMultiDeleteButton();
         }
 
@@ -719,61 +720,73 @@ window.initializeTable = initializeTable;
 
 // Multi-select functionality
 function toggleSelectAll() {
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
-    const multiDeleteBtn = document.getElementById('multiDeleteBtn');
-    const selectedCountSpan = document.getElementById('selectedCount');
-    
-    rowCheckboxes.forEach(checkbox => {
+    const selectAllCheckbox = document.getElementById("selectAll");
+    const rowCheckboxes = document.querySelectorAll(".row-checkbox");
+    const multiDeleteBtn = document.getElementById("multiDeleteBtn");
+    const selectedCountSpan = document.getElementById("selectedCount");
+
+    rowCheckboxes.forEach((checkbox) => {
         checkbox.checked = selectAllCheckbox.checked;
     });
-    
+
     updateMultiDeleteButton();
 }
 
 function updateRowSelection() {
     updateMultiDeleteButton();
-    
+
     // Update select all checkbox state
-    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const allChecked = Array.from(rowCheckboxes).every(checkbox => checkbox.checked);
-    const someChecked = Array.from(rowCheckboxes).some(checkbox => checkbox.checked);
-    
+    const rowCheckboxes = document.querySelectorAll(".row-checkbox");
+    const selectAllCheckbox = document.getElementById("selectAll");
+    const allChecked = Array.from(rowCheckboxes).every(
+        (checkbox) => checkbox.checked
+    );
+    const someChecked = Array.from(rowCheckboxes).some(
+        (checkbox) => checkbox.checked
+    );
+
     selectAllCheckbox.checked = allChecked;
     selectAllCheckbox.indeterminate = someChecked && !allChecked;
 }
 
 function updateMultiDeleteButton() {
-    const rowCheckboxes = document.querySelectorAll('.row-checkbox:checked');
-    const multiDeleteBtn = document.getElementById('multiDeleteBtn');
-    const selectedCountSpan = document.getElementById('selectedCount');
-    
+    const rowCheckboxes = document.querySelectorAll(".row-checkbox:checked");
+    const multiDeleteBtn = document.getElementById("multiDeleteBtn");
+    const selectedCountSpan = document.getElementById("selectedCount");
+
     if (rowCheckboxes.length > 0) {
-        multiDeleteBtn.classList.remove('hidden');
+        multiDeleteBtn.classList.remove("hidden");
         selectedCountSpan.textContent = rowCheckboxes.length;
     } else {
-        multiDeleteBtn.classList.add('hidden');
-        selectedCountSpan.textContent = '0';
+        multiDeleteBtn.classList.add("hidden");
+        selectedCountSpan.textContent = "0";
     }
 }
 
 function deleteSelectedRows() {
-    const selectedCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+    const selectedCheckboxes = document.querySelectorAll(
+        ".row-checkbox:checked"
+    );
     if (selectedCheckboxes.length === 0) return;
-    
-    if (confirm(`Are you sure you want to delete ${selectedCheckboxes.length} selected row(s)?`)) {
-        const selectedRows = Array.from(selectedCheckboxes).map(checkbox => parseInt(checkbox.value));
-        
+
+    if (
+        confirm(
+            `Are you sure you want to delete ${selectedCheckboxes.length} selected row(s)?`
+        )
+    ) {
+        const selectedRows = Array.from(selectedCheckboxes).map((checkbox) =>
+            parseInt(checkbox.value)
+        );
+
         // Call the existing deleteRow function for each selected row
-        selectedRows.forEach(rowIndex => {
+        selectedRows.forEach((rowIndex) => {
             deleteRow(rowIndex);
         });
-        
+
         // Reset select all checkbox
-        document.getElementById('selectAll').checked = false;
-        document.getElementById('selectAll').indeterminate = false;
-        
+        document.getElementById("selectAll").checked = false;
+        document.getElementById("selectAll").indeterminate = false;
+
         // Hide multi-delete button
         updateMultiDeleteButton();
     }
